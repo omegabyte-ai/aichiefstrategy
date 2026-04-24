@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Chief Strategy — Fractional Chief AI Officer</title>
+  <meta name="description" content="Your Fractional Chief AI Officer. AI strategy, roadmap, and implementation — from the team behind OMEGABYTE.AI." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:    #0a0a0a;
+      --ink-2:  #141414;
+      --ink-3:  #1c1c1c;
+      --rule:   rgba(255,255,255,0.08);
+      --dim:    rgba(255,255,255,0.38);
+      --mid:    rgba(255,255,255,0.62);
+      --bright: #ffffff;
+      --blue:   #3b7bff;
+      --blue-d: #1a5ce6;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--ink);
+      color: var(--bright);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px;
+      border-bottom: 1px solid var(--rule);
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(16px);
+    }
+    .nav-logo img { height: 22px; display: block; }
+    .nav-right { display: flex; align-items: center; gap: 32px; }
+    .nav-link { font-size: 13px; color: var(--dim); text-decoration: none; transition: color 0.15s; }
+    .nav-link:hover { color: var(--bright); }
+    .nav-cta {
+      font-size: 13px; font-weight: 600;
+      background: var(--blue); color: var(--bright);
+      padding: 8px 18px; border-radius: 6px;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: background 0.15s;
+    }
+    .nav-cta:hover { background: var(--blue-d); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px 40px 80px;
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+    }
+    .hero-logo {
+      margin-bottom: 56px;
+    }
+    .hero-logo img {
+      height: 44px;
+      display: block; margin: 0 auto;
+    }
+    .hero-label {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-size: clamp(40px, 7vw, 76px);
+      font-weight: 800; line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--bright);
+      max-width: 900px;
+      margin: 0 auto 28px;
+    }
+    .hero h1 em {
+      font-style: italic; font-weight: 300;
+      color: var(--mid);
+    }
+    .hero-body {
+      font-size: clamp(16px, 2vw, 19px);
+      color: var(--dim);
+      max-width: 520px; margin: 0 auto 52px;
+      line-height: 1.75;
+    }
+    .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      font-size: 14px; font-weight: 600;
+      padding: 13px 26px; border-radius: 7px;
+      text-decoration: none; display: inline-block;
+      transition: all 0.15s; cursor: pointer; border: none;
+    }
+    .btn-blue { background: var(--blue); color: var(--bright); }
+    .btn-blue:hover { background: var(--blue-d); }
+    .btn-ghost {
+      background: transparent; color: var(--mid);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.4); color: var(--bright); }
+    .hero-footnote {
+      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+      font-size: 12px; color: rgba(255,255,255,0.2);
+      white-space: nowrap;
+    }
+
+    /* ── SECTION BASE ── */
+    .section { padding: 96px 40px; border-bottom: 1px solid var(--rule); }
+    .section-inner { max-width: 1060px; margin: 0 auto; }
+    .label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 16px; display: block;
+    }
+    h2.heading {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800; letter-spacing: -0.025em; line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .body-text {
+      font-size: 17px; color: var(--dim); line-height: 1.8; max-width: 580px;
+    }
+
+    /* ── STATEMENT ── */
+    .statement { padding: 96px 40px; border-bottom: 1px solid var(--rule); }
+    .statement-inner {
+      max-width: 860px; margin: 0 auto; text-align: center;
+    }
+    .statement blockquote {
+      font-size: clamp(22px, 3.5vw, 36px);
+      font-weight: 300; line-height: 1.6;
+      letter-spacing: -0.01em;
+      color: var(--mid);
+    }
+    .statement blockquote strong {
+      font-weight: 700; color: var(--bright);
+    }
+    .statement-attr {
+      margin-top: 32px;
+      font-size: 13px; color: rgba(255,255,255,0.3);
+    }
+
+    /* ── SERVICES ── */
+    .services-table {
+      width: 100%; border-collapse: collapse; margin-top: 56px;
+    }
+    .services-table thead tr {
+      border-bottom: 1px solid var(--rule);
+    }
+    .services-table thead th {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.25); padding: 0 0 16px;
+      text-align: left;
+    }
+    .services-table thead th:not(:first-child) { padding-left: 32px; }
+    .services-table tbody tr {
+      border-bottom: 1px solid var(--rule);
+      transition: background 0.15s;
+    }
+    .services-table tbody tr:hover { background: rgba(255,255,255,0.025); }
+    .services-table tbody td {
+      padding: 28px 0; vertical-align: top;
+    }
+    .services-table tbody td:not(:first-child) { padding-left: 32px; }
+    .svc-name { font-size: 18px; font-weight: 700; color: var(--bright); margin-bottom: 6px; }
+    .svc-desc { font-size: 14px; color: var(--dim); line-height: 1.65; max-width: 380px; }
+    .svc-price { font-size: 20px; font-weight: 700; color: var(--bright); white-space: nowrap; }
+    .svc-cadence { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 4px; }
+    .svc-cta a {
+      font-size: 13px; font-weight: 600; color: var(--blue);
+      text-decoration: none; transition: color 0.15s;
+      white-space: nowrap;
+    }
+    .svc-cta a:hover { color: #6fa0ff; }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start; margin-top: 56px;
+    }
+    @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; gap: 48px; } }
+    .about-name { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 6px; }
+    .about-role { font-size: 14px; color: var(--blue); font-weight: 500; margin-bottom: 28px; }
+    .about-text {
+      font-size: 16px; color: var(--dim); line-height: 1.85;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .about-numbers {
+      display: flex; gap: 40px; margin-top: 36px; padding-top: 36px;
+      border-top: 1px solid var(--rule);
+    }
+    .num { }
+    .num-val { font-size: 30px; font-weight: 800; color: var(--bright); letter-spacing: -0.03em; }
+    .num-lbl { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+    .about-box {
+      background: var(--ink-2); border: 1px solid var(--rule);
+      border-radius: 14px; padding: 36px;
+    }
+    .about-box-heading { font-size: 16px; font-weight: 700; margin-bottom: 16px; line-height: 1.4; }
+    .about-box-body { font-size: 14px; color: var(--dim); line-height: 1.75; }
+    .about-box-footer {
+      margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--rule);
+      display: flex; align-items: center; gap: 14px;
+    }
+    .about-box-footer img { height: 18px; }
+    .about-box-footer span { font-size: 12px; color: rgba(255,255,255,0.3); }
+
+    /* ── LEAD MAGNET ── */
+    .lead-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start; margin-top: 56px;
+    }
+    @media (max-width: 760px) { .lead-inner { grid-template-columns: 1fr; gap: 40px; } }
+    .lead-form { display: flex; flex-direction: column; gap: 12px; }
+    .lead-form input {
+      font-family: 'Inter', sans-serif; font-size: 14px;
+      padding: 13px 16px;
+      background: var(--ink-2); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 7px; color: var(--bright); outline: none;
+      transition: border-color 0.15s;
+    }
+    .lead-form input::placeholder { color: rgba(255,255,255,0.25); }
+    .lead-form input:focus { border-color: var(--blue); }
+    .lead-form .btn { width: 100%; text-align: center; margin-top: 4px; }
+    .lead-form .fine {
+      font-size: 11px; color: rgba(255,255,255,0.22); text-align: center;
+    }
+    .checklist { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .checklist li {
+      display: flex; align-items: flex-start; gap: 14px;
+      font-size: 15px; color: var(--mid); line-height: 1.6;
+    }
+    .check-icon {
+      flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%;
+      background: rgba(59,123,255,0.15); border: 1px solid rgba(59,123,255,0.3);
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 2px;
+    }
+    .check-icon::after { content: '✓'; font-size: 10px; font-weight: 700; color: var(--blue); }
+
+    /* ── CTA ── */
+    .cta-section { padding: 120px 40px; text-align: center; border-bottom: 1px solid var(--rule); }
+    .cta-section h2 {
+      font-size: clamp(30px, 5vw, 54px);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .cta-section p { font-size: 18px; color: var(--dim); margin-bottom: 44px; }
+    .cta-section-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
+    footer { padding: 48px 40px; }
+    .footer-inner {
+      max-width: 1060px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 24px;
+    }
+    footer img.footer-logo { height: 20px; }
+    .footer-right { display: flex; gap: 28px; }
+    .footer-right a { font-size: 13px; color: rgba(255,255,255,0.28); text-decoration: none; }
+    .footer-right a:hover { color: var(--dim); }
+    .footer-copy {
+      max-width: 1060px; margin: 28px auto 0;
+      padding-top: 24px; border-top: 1px solid var(--rule);
+      font-size: 12px; color: rgba(255,255,255,0.18);
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 20px; }
+      .hero { padding: 100px 20px 60px; }
+      .section, .statement { padding: 72px 20px; }
+      .cta-section { padding: 80px 20px; }
+      footer { padding: 40px 20px; }
+      .services-table { display: block; overflow-x: auto; }
+      .nav-right .nav-link { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="assets/omegabyte-logo.png" alt="OMEGABYTE.AI" />
+    </a>
+    <div class="nav-right">
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#scorecard" class="nav-link">Free Scorecard</a>
+      <a href="mailto:shawn@shawnp.com?subject=AI%20Chief%20Strategy%20—%20Let's%20Talk" class="nav-cta">Book a Call</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-logo">
+      <img src="assets/omegabyte-logo.png" alt="OMEGABYTE.AI" />
+    </div>
+    <p class="hero-label">Fractional Chief AI Officer</p>
+    <h1>Your AI strategy.<br><em>Without the full-time overhead.</em></h1>
+    <p class="hero-body">
+      Most companies know they need AI. Very few know what to build first, what to ignore, and how to avoid wasting six figures finding out. That's what I do.
+    </p>
+    <div class="hero-actions">
+      <a href="mailto:shawn@shawnp.com?subject=AI%20Chief%20Strategy%20—%20Let's%20Talk" class="btn btn-blue">Book a Discovery Call</a>
+      <a href="#scorecard" class="btn btn-ghost">Get the Free AI Scorecard</a>
+    </div>
+    <p class="hero-footnote">aichiefstrategy.com — An OMEGABYTE.AI Company</p>
+  </section>
+
+  <!-- STATEMENT -->
+  <div class="statement">
+    <div class="statement-inner">
+      <blockquote>
+        "Every company is about to become an AI company whether they're ready or not.
+        <strong>The ones who survive will have had a real strategy — not just a ChatGPT subscription.</strong>"
+      </blockquote>
+      <p class="statement-attr">— Shawn Panchacharam, Founder, OMEGABYTE.AI</p>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="section-inner">
+      <span class="label">What I Offer</span>
+      <h2 class="heading">The right engagement<br>for where you are now.</h2>
+      <p class="body-text">Start with a focused project. Grow into an ongoing partnership. Build when you're ready to execute.</p>
+
+      <table class="services-table">
+        <thead>
+          <tr>
+            <th>Engagement</th>
+            <th>Investment</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <p class="svc-name">AI Strategy Roadmap</p>
+              <p class="svc-desc">A fixed-scope engagement: AI readiness audit, prioritized 90-day roadmap, vendor recommendations, and an executive briefing deck. You walk away knowing exactly what to build and in what order.</p>
+            </td>
+            <td>
+              <p class="svc-price">$5K – $15K</p>
+              <p class="svc-cadence">One-time project</p>
+            </td>
+            <td class="svc-cta"><a href="mailto:shawn@shawnp.com?subject=AI%20Strategy%20Roadmap">Start here →</a></td>
+          </tr>
+          <tr>
+            <td>
+              <p class="svc-name">Fractional CAIO Retainer</p>
+              <p class="svc-desc">I join your leadership team as your AI executive. Monthly strategy sessions, vendor evaluation, team enablement, and board-ready AI reporting. 3–5 clients at a time — so you get real attention.</p>
+            </td>
+            <td>
+              <p class="svc-price">$3K – $10K</p>
+              <p class="svc-cadence">Per month</p>
+            </td>
+            <td class="svc-cta"><a href="mailto:shawn@shawnp.com?subject=Fractional%20CAIO%20Retainer">Let's talk →</a></td>
+          </tr>
+          <tr>
+            <td>
+              <p class="svc-name">AI Implementation</p>
+              <p class="svc-desc">Most advisors hand you a plan and leave. OMEGABYTE.AI's engineering team builds what the roadmap calls for — custom agents, automations, data pipelines, and intelligent workflows. Strategy and execution under one roof.</p>
+            </td>
+            <td>
+              <p class="svc-price">$20K – $100K+</p>
+              <p class="svc-cadence">Per project</p>
+            </td>
+            <td class="svc-cta"><a href="mailto:shawn@shawnp.com?subject=AI%20Implementation">Tell me more →</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="section-inner">
+      <span class="label">Who This Is</span>
+      <div class="about-grid">
+        <div>
+          <h3 class="about-name">Shawn Panchacharam</h3>
+          <p class="about-role">Founder, OMEGABYTE.AI — Fractional CAIO</p>
+          <div class="about-text">
+            <p>I founded OMEGABYTE in 1992 at 20 years old. Over the next three decades I built technology businesses, ran teams, closed over $200M in sales revenue, and watched every major technology shift reshape what companies had to do to survive.</p>
+            <p>AI is the biggest one. And most businesses are approaching it completely wrong — chasing tools instead of building strategy, delegating it to IT instead of the C-suite, or doing nothing and hoping their competitors aren't moving faster.</p>
+            <p>I work with a small number of companies at a time. I get embedded as their AI executive, help them figure out what to build, and stay in it long enough to see it actually happen.</p>
+          </div>
+          <div class="about-numbers">
+            <div class="num">
+              <div class="num-val">30+</div>
+              <div class="num-lbl">Years in tech</div>
+            </div>
+            <div class="num">
+              <div class="num-val">$200M+</div>
+              <div class="num-lbl">Revenue built</div>
+            </div>
+            <div class="num">
+              <div class="num-val">1992</div>
+              <div class="num-lbl">OMEGABYTE founded</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="about-box">
+            <p class="about-box-heading">Most fractional advisors stop at strategy. We stay for the build.</p>
+            <p class="about-box-body">When your roadmap identifies a custom AI agent, an automation layer, or an intelligent data pipeline — you don't get handed off to a different firm. OMEGABYTE.AI's engineering team builds it. Same relationship, same context, no translation layer.</p>
+            <p class="about-box-body" style="margin-top:16px;">That's a capability no other fractional CAIO brings to the table.</p>
+            <div class="about-box-footer">
+              <img src="assets/omegabyte-logo.png" alt="OMEGABYTE.AI" />
+              <span>Austin, Texas &nbsp;·&nbsp; Founded 1992 &nbsp;·&nbsp; omegabyte.ai</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEAD MAGNET -->
+  <section class="section" id="scorecard">
+    <div class="section-inner">
+      <span class="label">Free Resource</span>
+      <h2 class="heading">Is your business<br>actually AI-ready?</h2>
+      <p class="body-text">Most companies can't answer that question honestly. This scorecard takes 10 minutes and gives you a clear answer — plus a ranked list of where to start.</p>
+      <div class="lead-inner">
+        <div class="lead-form">
+          <input type="text" placeholder="Your name" />
+          <input type="email" placeholder="Work email" />
+          <input type="text" placeholder="Company name" />
+          <a href="#" class="btn btn-blue">Send Me the Scorecard →</a>
+          <p class="fine">No spam. Just the scorecard. Unsubscribe anytime.</p>
+        </div>
+        <ul class="checklist">
+          <li>
+            <span class="check-icon"></span>
+            Data infrastructure audit — do you have the foundation AI actually needs to run on?
+          </li>
+          <li>
+            <span class="check-icon"></span>
+            Process automation map — where AI will generate the fastest, most measurable ROI
+          </li>
+          <li>
+            <span class="check-icon"></span>
+            Team readiness assessment — skills gaps, training needs, change management priorities
+          </li>
+          <li>
+            <span class="check-icon"></span>
+            Competitive positioning — how far behind or ahead are you vs. your industry?
+          </li>
+          <li>
+            <span class="check-icon"></span>
+            Your three highest-priority AI initiatives, ranked by impact and feasibility
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="book">
+    <div style="max-width: 700px; margin: 0 auto;">
+      <h2>30 minutes.<br>No pitch. Just clarity.</h2>
+      <p>Let's spend half an hour figuring out exactly where AI fits in your business — and what it's costing you to wait.</p>
+      <div class="cta-section-actions">
+        <a href="mailto:shawn@shawnp.com?subject=AI%20Chief%20Strategy%20—%20Discovery%20Call" class="btn btn-blue">Book a Discovery Call</a>
+        <a href="#scorecard" class="btn btn-ghost">Get the Free Scorecard First</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <img src="assets/omegabyte-logo.png" alt="OMEGABYTE.AI" class="footer-logo" />
+      <div class="footer-right">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#scorecard">Free Scorecard</a>
+        <a href="mailto:shawn@shawnp.com">Contact</a>
+      </div>
+    </div>
+    <p class="footer-copy">© 2026 OMEGABYTE.AI — AI Chief Strategy · aichiefstrategy.com · Austin, Texas</p>
+  </footer>
+
+</body>
+</html>
