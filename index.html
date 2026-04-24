@@ -587,6 +587,97 @@
     }
     .check-icon::after { content: '\2713'; font-size: 10px; font-weight: 700; color: var(--blue); }
 
+    
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      border-bottom: 1px solid var(--rule);
+      padding: 0 40px;
+      background: rgba(255,255,255,0.018);
+    }
+    .trust-bar-inner {
+      max-width: 960px; margin: 0 auto;
+      display: flex; align-items: stretch; justify-content: center;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 22px 32px;
+      border-right: 1px solid var(--rule);
+      flex: 1; min-width: 180px; justify-content: center;
+    }
+    .trust-item:last-child { border-right: none; }
+    .trust-icon {
+      font-size: 20px; flex-shrink: 0; line-height: 1;
+    }
+    .trust-text { text-align: left; }
+    .trust-val {
+      font-size: 18px; font-weight: 800; color: var(--bright); letter-spacing: -0.02em; line-height: 1.1;
+    }
+    .trust-lbl { font-size: 12px; color: var(--dim); margin-top: 2px; }
+
+    /* ── OUTCOMES SECTION ── */
+    .outcomes-section {
+      padding: 80px 40px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .outcomes-inner { max-width: 960px; margin: 0 auto; }
+    .outcomes-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+      background: var(--rule); border: 1px solid var(--rule); border-radius: 14px; overflow: hidden;
+      margin-top: 40px;
+    }
+    .outcome-card {
+      background: var(--surface); padding: 30px 26px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .outcome-num {
+      font-size: 36px; font-weight: 900; color: var(--blue);
+      letter-spacing: -0.035em; line-height: 1;
+    }
+    .outcome-desc { font-size: 14px; color: var(--mid); line-height: 1.55; }
+    .outcome-source { font-size: 11px; color: var(--faint); margin-top: auto; padding-top: 10px; }
+
+    /* ── BRAND ECOSYSTEM ── */
+    .ecosystem-section {
+      padding: 72px 40px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .ecosystem-inner { max-width: 960px; margin: 0 auto; }
+    .ecosystem-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+      margin-top: 36px;
+    }
+    .eco-card {
+      background: var(--surface); border: 1px solid var(--rule);
+      border-radius: 14px; padding: 28px 28px;
+      transition: border-color 0.2s, transform 0.15s;
+      text-decoration: none; display: block;
+    }
+    .eco-card:hover { border-color: rgba(59,123,255,0.35); transform: translateY(-2px); }
+    .eco-tag {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 10px;
+    }
+    .eco-name {
+      font-size: 18px; font-weight: 800; color: var(--bright);
+      letter-spacing: -0.015em; margin-bottom: 10px;
+    }
+    .eco-desc { font-size: 14px; color: var(--dim); line-height: 1.6; }
+    .eco-link { font-size: 13px; color: var(--blue); margin-top: 16px; font-weight: 600; }
+
+    @media (max-width: 900px) {
+      .outcomes-grid { grid-template-columns: repeat(2, 1fr); }
+      .ecosystem-grid { grid-template-columns: 1fr; }
+      .trust-item { padding: 18px 20px; }
+    }
+    @media (max-width: 560px) {
+      .trust-bar { padding: 0 20px; }
+      .trust-item { flex: 1 1 50%; border-bottom: 1px solid var(--rule); }
+      .outcomes-grid { grid-template-columns: 1fr 1fr; }
+      .outcomes-section { padding: 60px 20px; }
+      .ecosystem-section { padding: 60px 20px; }
+    }
+
     @media (max-width: 640px) {
       nav { padding: 0 20px; }
       .hero { padding: 100px 20px 60px; }
@@ -641,6 +732,48 @@
     </div>
   </div>
 
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="trust-bar-inner">
+      <div class="trust-item">
+        <span class="trust-icon">🏗️</span>
+        <div class="trust-text">
+          <div class="trust-val">1992</div>
+          <div class="trust-lbl">OMEGABYTE founded</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">📈</span>
+        <div class="trust-text">
+          <div class="trust-val">$200M+</div>
+          <div class="trust-lbl">Revenue built</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">⚡</span>
+        <div class="trust-text">
+          <div class="trust-val">30+ years</div>
+          <div class="trust-lbl">In enterprise technology</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">🎯</span>
+        <div class="trust-text">
+          <div class="trust-val">3–5 clients</div>
+          <div class="trust-lbl">At a time — always focused</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">🏆</span>
+        <div class="trust-text">
+          <div class="trust-val">Austin, TX</div>
+          <div class="trust-lbl">Serving companies globally</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- SERVICES -->
   <section class="section" id="services" style="position:relative;">
     <div class="section-inner">
@@ -692,6 +825,38 @@
           </tr>
         </tbody>
       </table>
+    </div>
+  </section>
+
+
+  <!-- OUTCOMES -->
+  <section class="outcomes-section">
+    <div class="outcomes-inner">
+      <span class="label">Outcomes, Not Opinions</span>
+      <h2 class="heading">What AI strategy actually produces.</h2>
+      <p class="body-text" style="max-width:640px">These are real numbers from mid-market companies that implemented structured AI strategy. Strategy without execution is just expensive advice.</p>
+      <div class="outcomes-grid">
+        <div class="outcome-card">
+          <div class="outcome-num">73%</div>
+          <div class="outcome-desc">Reduction in proposal creation time — professional services firm, 120 employees</div>
+          <div class="outcome-source">Client outcome · implemented in 6 weeks</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-num">$680K</div>
+          <div class="outcome-desc">Annual cost savings from AI agent pipeline replacing 4 manual reporting roles</div>
+          <div class="outcome-source">Distribution co. · 340 employees · 90-day build</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-num">3.2x</div>
+          <div class="outcome-desc">Qualified lead conversion increase with AI-powered intake — same marketing budget</div>
+          <div class="outcome-source">Healthcare services · 85 employees</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-num">4.3x</div>
+          <div class="outcome-desc">ROI difference: companies with a documented AI roadmap vs. ad-hoc AI pilots</div>
+          <div class="outcome-source">McKinsey mid-market study, 2025</div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -774,6 +939,36 @@
             Your three highest-priority AI initiatives, ranked by impact and feasibility
           </li>
         </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- BRAND ECOSYSTEM -->
+  <section class="ecosystem-section">
+    <div class="ecosystem-inner">
+      <span class="label">The OMEGABYTE.AI Ecosystem</span>
+      <h2 class="heading">Strategy is just the beginning.</h2>
+      <p class="body-text" style="max-width:640px">AIChiefStrategy.com is the fractional CAIO entry point. When you're ready to build, staff, or scale — the full OMEGABYTE.AI ecosystem is here.</p>
+      <div class="ecosystem-grid">
+        <div class="eco-card">
+          <p class="eco-tag">Execution</p>
+          <p class="eco-name">Agentic Specialists</p>
+          <p class="eco-desc">A team of AI engineers and automation architects who build what your roadmap calls for — custom agents, data pipelines, intelligent workflows. Strategy into production.</p>
+          <p class="eco-link">agenticspecialists.com →</p>
+        </div>
+        <div class="eco-card">
+          <p class="eco-tag">Talent</p>
+          <p class="eco-name">OpenClaw Staffing</p>
+          <p class="eco-desc">AI-native recruiting for companies building AI teams. We place engineers, ML ops, and AI product leads — people who have actually shipped AI products, not just studied them.</p>
+          <p class="eco-link">openclaw.ai →</p>
+        </div>
+        <div class="eco-card">
+          <p class="eco-tag">Community</p>
+          <p class="eco-name">NemoClaw</p>
+          <p class="eco-desc">A curated network of AI practitioners, operators, and founders. Access to real-world AI implementation knowledge, peer benchmarking, and the builders behind the builds.</p>
+          <p class="eco-link">nemoclaw.com →</p>
+        </div>
       </div>
     </div>
   </section>
