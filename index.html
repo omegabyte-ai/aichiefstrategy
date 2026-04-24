@@ -223,21 +223,122 @@
       gap: 80px; align-items: start; margin-top: 56px;
     }
     @media (max-width: 760px) { .lead-inner { grid-template-columns: 1fr; gap: 40px; } }
-    .lead-form { display: flex; flex-direction: column; gap: 12px; }
-    .lead-form input {
-      font-family: 'Inter', sans-serif; font-size: 14px;
-      padding: 13px 16px;
-      background: var(--ink-2); border: 1px solid rgba(255,255,255,0.12);
+    .lead-cta-block { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+    .lead-cta-block .btn { font-size: 15px; padding: 15px 28px; }
+    .lead-cta-meta { font-size: 12px; color: rgba(255,255,255,0.3); }
+    .checklist { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+
+    /* ── SCORECARD MODAL ── */
+    .sc-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,0.85);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .sc-overlay.open { opacity: 1; pointer-events: all; }
+    .sc-modal {
+      background: #111; border: 1px solid var(--rule);
+      border-radius: 16px; max-width: 600px; width: 100%;
+      max-height: 90vh; overflow-y: auto;
+      position: relative;
+      transform: translateY(16px);
+      transition: transform 0.2s;
+    }
+    .sc-overlay.open .sc-modal { transform: translateY(0); }
+    .sc-progress-bar {
+      height: 3px; background: rgba(255,255,255,0.08);
+      border-radius: 3px 3px 0 0; overflow: hidden;
+    }
+    .sc-progress-fill {
+      height: 100%; background: var(--blue);
+      border-radius: 3px;
+      transition: width 0.35s ease;
+    }
+    .sc-body { padding: 40px 44px 44px; }
+    @media (max-width: 560px) { .sc-body { padding: 28px 24px 32px; } }
+    .sc-close {
+      position: absolute; top: 18px; right: 20px;
+      background: none; border: none; color: rgba(255,255,255,0.3);
+      font-size: 22px; cursor: pointer; line-height: 1;
+      transition: color 0.15s;
+    }
+    .sc-close:hover { color: var(--bright); }
+    .sc-step-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 20px;
+    }
+    .sc-question {
+      font-size: clamp(18px, 3vw, 24px); font-weight: 700;
+      line-height: 1.35; letter-spacing: -0.015em;
+      color: var(--bright); margin-bottom: 28px;
+    }
+    .sc-answers { display: flex; flex-direction: column; gap: 10px; }
+    .sc-answer {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px; padding: 15px 18px;
+      font-size: 15px; color: var(--mid);
+      cursor: pointer; transition: all 0.15s;
+      text-align: left;
+    }
+    .sc-answer:hover {
+      background: rgba(59,123,255,0.08);
+      border-color: rgba(59,123,255,0.4);
+      color: var(--bright);
+    }
+    .sc-answer.selected {
+      background: rgba(59,123,255,0.14);
+      border-color: var(--blue);
+      color: var(--bright);
+    }
+
+    /* results */
+    .sc-results { display: none; }
+    .sc-results.active { display: block; }
+    .sc-score-row {
+      display: flex; align-items: baseline; gap: 16px; margin-bottom: 12px;
+    }
+    .sc-score-num {
+      font-size: 88px; font-weight: 800; letter-spacing: -0.04em;
+      color: var(--blue); line-height: 1;
+    }
+    .sc-score-denom {
+      font-size: 18px; color: rgba(255,255,255,0.25); font-weight: 400;
+    }
+    .sc-tier-badge {
+      display: inline-block; padding: 5px 14px; border-radius: 100px;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.04em;
+      margin-bottom: 20px;
+    }
+    .sc-tier-pioneer { background: rgba(59,123,255,0.18); color: #6fa0ff; border: 1px solid rgba(59,123,255,0.4); }
+    .sc-tier-aware   { background: rgba(34,197,94,0.14);  color: #4ade80; border: 1px solid rgba(34,197,94,0.35); }
+    .sc-tier-reactive{ background: rgba(251,191,36,0.14); color: #fbbf24; border: 1px solid rgba(251,191,36,0.35); }
+    .sc-tier-blind   { background: rgba(239,68,68,0.14);  color: #f87171; border: 1px solid rgba(239,68,68,0.35); }
+    .sc-tier-text {
+      font-size: 16px; color: var(--dim); line-height: 1.75; margin-bottom: 28px;
+    }
+    .sc-divider { height: 1px; background: var(--rule); margin: 28px 0; }
+    .sc-cta-heading {
+      font-size: 15px; font-weight: 600; color: var(--bright); margin-bottom: 16px;
+    }
+    .sc-email-row { display: flex; gap: 10px; margin-bottom: 14px; }
+    .sc-email-row input {
+      flex: 1; font-family: 'Inter', sans-serif; font-size: 14px;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
       border-radius: 7px; color: var(--bright); outline: none;
       transition: border-color 0.15s;
     }
-    .lead-form input::placeholder { color: rgba(255,255,255,0.25); }
-    .lead-form input:focus { border-color: var(--blue); }
-    .lead-form .btn { width: 100%; text-align: center; margin-top: 4px; }
-    .lead-form .fine {
-      font-size: 11px; color: rgba(255,255,255,0.22); text-align: center;
+    .sc-email-row input::placeholder { color: rgba(255,255,255,0.25); }
+    .sc-email-row input:focus { border-color: var(--blue); }
+    .sc-email-row .btn { white-space: nowrap; }
+    .sc-skip {
+      font-size: 13px; color: rgba(255,255,255,0.32);
     }
-    .checklist { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .sc-skip a { color: var(--blue); text-decoration: none; }
+    .sc-skip a:hover { color: #6fa0ff; }
     .checklist li {
       display: flex; align-items: flex-start; gap: 14px;
       font-size: 15px; color: var(--mid); line-height: 1.6;
@@ -433,14 +534,11 @@
     <div class="section-inner">
       <span class="label">Free Resource</span>
       <h2 class="heading">Is your business<br>actually AI-ready?</h2>
-      <p class="body-text">Most companies can't answer that question honestly. This scorecard takes 10 minutes and gives you a clear answer — plus a ranked list of where to start.</p>
+      <p class="body-text">Most companies can't answer that question honestly. This scorecard takes 5 minutes and gives you a clear score — plus a custom action plan based on exactly where you are.</p>
       <div class="lead-inner">
-        <div class="lead-form">
-          <input type="text" placeholder="Your name" />
-          <input type="email" placeholder="Work email" />
-          <input type="text" placeholder="Company name" />
-          <a href="#" class="btn btn-blue">Send Me the Scorecard →</a>
-          <p class="fine">No spam. Just the scorecard. Unsubscribe anytime.</p>
+        <div class="lead-cta-block">
+          <button class="btn btn-blue" id="sc-open-btn">Start the scorecard — 5 min</button>
+          <p class="lead-cta-meta">6 questions · no login required · instant results</p>
         </div>
         <ul class="checklist">
           <li>
@@ -493,6 +591,256 @@
     </div>
     <p class="footer-copy">© 2026 OMEGABYTE.AI — AI Chief Strategy · aichiefstrategy.com · Austin, Texas</p>
   </footer>
+
+
+  <!-- SCORECARD MODAL -->
+  <div class="sc-overlay" id="sc-overlay" role="dialog" aria-modal="true" aria-label="AI Readiness Scorecard">
+    <div class="sc-modal" id="sc-modal">
+      <div class="sc-progress-bar"><div class="sc-progress-fill" id="sc-progress"></div></div>
+      <button class="sc-close" id="sc-close" aria-label="Close">×</button>
+      <div class="sc-body">
+
+        <!-- Question screen -->
+        <div id="sc-question-screen">
+          <p class="sc-step-label" id="sc-step-label">Question 1 of 6</p>
+          <p class="sc-question" id="sc-question-text"></p>
+          <div class="sc-answers" id="sc-answers"></div>
+        </div>
+
+        <!-- Results screen -->
+        <div id="sc-results-screen" class="sc-results">
+          <p class="sc-step-label">Your AI Readiness Score</p>
+          <div class="sc-score-row">
+            <span class="sc-score-num" id="sc-score-display">0</span>
+            <span class="sc-score-denom">/ 100</span>
+          </div>
+          <span class="sc-tier-badge" id="sc-tier-badge"></span>
+          <p class="sc-tier-text" id="sc-tier-text"></p>
+          <div class="sc-divider"></div>
+          <p class="sc-cta-heading">Get your full breakdown — including a custom 3-step action plan based on your answers</p>
+          <div class="sc-email-row">
+            <input type="email" id="sc-email" placeholder="your@email.com" />
+            <button class="btn btn-blue" id="sc-send-btn">Send my results</button>
+          </div>
+          <p class="sc-skip">Or skip the email — <a href="mailto:shawn@shawnp.com?subject=AI%20Readiness%20Call">Book a 30-min call and I'll walk through it live.</a></p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var questions = [
+        {
+          q: "Does your company have a named person accountable for AI strategy?",
+          answers: [
+            "Yes, it's a dedicated role",
+            "Someone handles it part-time",
+            "It lives with IT/ops by default",
+            "No one owns it"
+          ]
+        },
+        {
+          q: "How much of your team's daily work is repetitive and rules-based?",
+          answers: [
+            "Very little — mostly creative/judgment work",
+            "Maybe 20–30%",
+            "Roughly half",
+            "Most of it — we run on process"
+          ]
+        },
+        {
+          q: "How are your competitors using AI right now?",
+          answers: [
+            "We're ahead of them",
+            "About the same as us",
+            "They're pulling ahead",
+            "Honestly, we don't know"
+          ]
+        },
+        {
+          q: "What's your biggest blocker to AI adoption?",
+          answers: [
+            "We don't know where to start",
+            "Budget and ROI uncertainty",
+            "Team resistance or skills gap",
+            "We've started — execution is the challenge"
+          ]
+        },
+        {
+          q: "Have you piloted any AI tools in the last 6 months?",
+          answers: [
+            "Yes, multiple — some in production",
+            "We've run a pilot or two",
+            "We've explored but nothing formal",
+            "Not yet"
+          ]
+        },
+        {
+          q: "How confident are you in your current AI roadmap?",
+          answers: [
+            "Very — we have a documented strategy",
+            "Somewhat — we have a direction",
+            "Not very — it's mostly reactive",
+            "We don't have one"
+          ]
+        }
+      ];
+
+      // Scoring: A=4, B=3, C=2, D=1
+      // Q4 scoring is intentionally answer-position based (A=1 blocker knowledge, D=4 execution)
+      // Using simple A=4 B=3 C=2 D=1 across all questions as specified
+      var scoreMap = [4, 3, 2, 1];
+
+      var tiers = [
+        { min: 85, label: "AI Pioneer",  cls: "sc-tier-pioneer",  text: "You're ahead of the curve. The question isn't whether to act — it's how fast to scale." },
+        { min: 65, label: "AI Aware",    cls: "sc-tier-aware",    text: "You see the opportunity. What's missing is a coordinated strategy to capture it." },
+        { min: 40, label: "AI Reactive", cls: "sc-tier-reactive", text: "You're responding to AI pressure but not driving it. That gap is closing fast." },
+        { min: 0,  label: "AI Blind",    cls: "sc-tier-blind",    text: "You're at risk. Competitors are building advantages you can't see yet." }
+      ];
+
+      var current = 0;
+      var rawScore = 0;
+      var answers = [];
+
+      var overlay      = document.getElementById('sc-overlay');
+      var openBtn      = document.getElementById('sc-open-btn');
+      var closeBtn     = document.getElementById('sc-close');
+      var progressFill = document.getElementById('sc-progress');
+      var stepLabel    = document.getElementById('sc-step-label');
+      var questionText = document.getElementById('sc-question-text');
+      var answersEl    = document.getElementById('sc-answers');
+      var qScreen      = document.getElementById('sc-question-screen');
+      var rScreen      = document.getElementById('sc-results-screen');
+      var scoreDisplay = document.getElementById('sc-score-display');
+      var tierBadge    = document.getElementById('sc-tier-badge');
+      var tierText     = document.getElementById('sc-tier-text');
+      var sendBtn      = document.getElementById('sc-send-btn');
+
+      function openModal() {
+        current = 0; rawScore = 0; answers = [];
+        qScreen.style.display = 'block';
+        rScreen.classList.remove('active');
+        renderQuestion();
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      function renderQuestion() {
+        var q = questions[current];
+        stepLabel.textContent = 'Question ' + (current + 1) + ' of ' + questions.length;
+        questionText.textContent = q.q;
+        answersEl.innerHTML = '';
+        progressFill.style.width = (current / questions.length * 100) + '%';
+
+        q.answers.forEach(function (a, i) {
+          var btn = document.createElement('button');
+          btn.className = 'sc-answer';
+          btn.textContent = a;
+          btn.addEventListener('click', function () { selectAnswer(i); });
+          answersEl.appendChild(btn);
+        });
+      }
+
+      function selectAnswer(idx) {
+        var btns = answersEl.querySelectorAll('.sc-answer');
+        btns.forEach(function (b) { b.classList.remove('selected'); });
+        btns[idx].classList.add('selected');
+        answers.push(idx);
+        rawScore += scoreMap[idx];
+
+        setTimeout(function () {
+          current++;
+          if (current < questions.length) {
+            renderQuestion();
+          } else {
+            showResults();
+          }
+        }, 320);
+      }
+
+      function showResults() {
+        progressFill.style.width = '100%';
+        var finalScore = Math.round((rawScore / (questions.length * 4)) * 100);
+        var tier = tiers.find(function (t) { return finalScore >= t.min; });
+
+        qScreen.style.display = 'none';
+        rScreen.classList.add('active');
+
+        // reset badge classes
+        tierBadge.className = 'sc-tier-badge ' + tier.cls;
+        tierBadge.textContent = tier.label;
+        tierText.textContent = tier.text;
+
+        // count-up animation
+        scoreDisplay.textContent = '0';
+        var start = 0;
+        var duration = 900;
+        var startTime = null;
+        function step(ts) {
+          if (!startTime) startTime = ts;
+          var progress = Math.min((ts - startTime) / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          scoreDisplay.textContent = Math.round(eased * finalScore);
+          if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+
+      sendBtn.addEventListener('click', function () {
+        var email = document.getElementById('sc-email').value.trim();
+        if (!email || !email.includes('@')) {
+          document.getElementById('sc-email').style.borderColor = '#f87171';
+          return;
+        }
+        sendBtn.textContent = 'Sent!';
+        sendBtn.disabled = true;
+        sendBtn.style.background = '#1a3a1a';
+        sendBtn.style.color = '#4ade80';
+      });
+
+      openBtn.addEventListener('click', openModal);
+      closeBtn.addEventListener('click', closeModal);
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) closeModal();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeModal();
+      });
+
+      // also wire the hero ghost button
+      var heroScoreBtn = document.querySelector('a[href="#scorecard"].btn-ghost');
+      if (heroScoreBtn) {
+        heroScoreBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          openModal();
+        });
+      }
+      // wire footer scorecard link
+      var footerLink = document.querySelector('footer a[href="#scorecard"]');
+      if (footerLink) {
+        footerLink.addEventListener('click', function (e) {
+          e.preventDefault();
+          openModal();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+      // wire cta section ghost button
+      var ctaGhost = document.querySelector('.cta-section-actions a[href="#scorecard"]');
+      if (ctaGhost) {
+        ctaGhost.addEventListener('click', function (e) {
+          e.preventDefault();
+          openModal();
+        });
+      }
+    })();
+  </script>
 
 </body>
 </html>
