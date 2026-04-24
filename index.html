@@ -751,7 +751,7 @@
       <div class="lead-inner">
         <div class="lead-cta-block">
           <button class="btn btn-blue" id="sc-open-btn">Start the scorecard — 5 min</button>
-          <p class="lead-cta-meta">6 questions · no login required · instant results</p>
+          <p class="lead-cta-meta">7 questions · no login required · instant results</p>
         </div>
         <ul class="checklist">
           <li>
@@ -830,6 +830,10 @@
           <span class="sc-tier-badge" id="sc-tier-badge"></span>
           <p class="sc-tier-text" id="sc-tier-text"></p>
           <div class="sc-divider"></div>
+          <div id="sc-budget-row" class="sc-budget-row" style="display:none;margin-bottom:14px;padding:10px 14px;background:rgba(255,255,255,0.05);border-radius:8px;border-left:3px solid #3b82f6;">
+            <span style="font-size:0.75rem;color:#9ca3af;text-transform:uppercase;letter-spacing:0.05em;">Budget Signal</span>
+            <p id="sc-budget-label" style="margin:4px 0 0;font-size:0.9rem;color:#e5e7eb;"></p>
+          </div>
           <p class="sc-cta-heading">Get your full breakdown — including a custom 3-step action plan based on your answers</p>
           <div class="sc-email-row">
             <input type="email" id="sc-email" placeholder="your@email.com" />
@@ -898,13 +902,23 @@
             "Not very — it's mostly reactive",
             "We don't have one"
           ]
+        },
+        {
+          q: "Have you considered or established a budget for AI this year?",
+          answers: [
+            "$50K+ — serious investment allocated",
+            "$10K–$50K — exploring options",
+            "Under $10K — early-stage / pilot budget",
+            "No budget defined yet"
+          ],
+          qualifying: true
         }
       ];
 
-      // Scoring: A=4, B=3, C=2, D=1
-      // Q4 scoring is intentionally answer-position based (A=1 blocker knowledge, D=4 execution)
-      // Using simple A=4 B=3 C=2 D=1 across all questions as specified
+      // Scoring: A=4, B=3, C=2, D=1 for readiness questions
+      // Qualifying questions (budget) are tracked separately and not scored
       var scoreMap = [4, 3, 2, 1];
+      var budgetAnswer = null;  // captured from qualifying question
 
       var tiers = [
         { min: 85, label: "AI Pioneer",  cls: "sc-tier-pioneer",  text: "You're ahead of the curve. The question isn't whether to act — it's how fast to scale." },
@@ -932,7 +946,7 @@
       var sendBtn      = document.getElementById('sc-send-btn');
 
       function openModal() {
-        current = 0; rawScore = 0; answers = [];
+        current = 0; rawScore = 0; answers = []; budgetAnswer = null;
         qScreen.style.display = 'block';
         rScreen.classList.remove('active');
         renderQuestion();
@@ -966,7 +980,12 @@
         btns.forEach(function (b) { b.classList.remove('selected'); });
         btns[idx].classList.add('selected');
         answers.push(idx);
-        rawScore += scoreMap[idx];
+        if (questions[current] && questions[current].qualifying) {
+          // Budget qualifying question — capture the answer text, don't score
+          budgetAnswer = questions[current].answers[idx];
+        } else {
+          rawScore += scoreMap[idx];
+        }
 
         setTimeout(function () {
           current++;
@@ -980,7 +999,8 @@
 
       function showResults() {
         progressFill.style.width = '100%';
-        var finalScore = Math.round((rawScore / (questions.length * 4)) * 100);
+        var scoredQuestions = questions.filter(function(q){ return !q.qualifying; });
+        var finalScore = Math.round((rawScore / (scoredQuestions.length * 4)) * 100);
         var tier = tiers.find(function (t) { return finalScore >= t.min; });
 
         qScreen.style.display = 'none';
@@ -990,6 +1010,16 @@
         tierBadge.className = 'sc-tier-badge ' + tier.cls;
         tierBadge.textContent = tier.label;
         tierText.textContent = tier.text;
+
+        // Show budget signal if captured
+        if (budgetAnswer) {
+          var budgetRow = document.getElementById('sc-budget-row');
+          var budgetLabel = document.getElementById('sc-budget-label');
+          if (budgetRow && budgetLabel) {
+            budgetLabel.textContent = budgetAnswer;
+            budgetRow.style.display = 'block';
+          }
+        }
 
         // count-up animation
         scoreDisplay.textContent = '0';
