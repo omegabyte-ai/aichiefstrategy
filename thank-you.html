@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your AI Gap Report | AIChiefStrategy.com</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1YN3X8R4K7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1YN3X8R4K7');
+  </script>
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111;
+      --surface2: #161616;
+      --rule: rgba(255,255,255,0.08);
+      --blue: #3b7bff;
+      --blue-glow: rgba(59,123,255,0.15);
+      --bright: #f5f5f5;
+      --mid: rgba(255,255,255,0.65);
+      --dim: rgba(255,255,255,0.42);
+      --faint: rgba(255,255,255,0.18);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--mid);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { color: #6fa0ff; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--rule);
+      padding: 0 40px;
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      height: 22px; width: auto;
+      mix-blend-mode: screen;
+    }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--blue); color: #fff;
+      border: none; border-radius: 8px;
+      padding: 9px 20px; font-size: 14px; font-weight: 600;
+      cursor: pointer; text-decoration: none; transition: opacity 0.15s;
+    }
+    .nav-cta:hover { opacity: 0.88; color: #fff; }
+
+    /* ── HERO SCORE SECTION ── */
+    .score-hero {
+      padding: 80px 24px 64px;
+      text-align: center;
+      border-bottom: 1px solid var(--rule);
+      background: radial-gradient(ellipse 700px 400px at 50% 0%, rgba(59,123,255,0.07) 0%, transparent 70%);
+    }
+    .score-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 20px;
+    }
+    .greeting {
+      font-size: clamp(28px, 5vw, 48px); font-weight: 800;
+      color: var(--bright); letter-spacing: -0.025em; line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .score-display {
+      display: flex; align-items: baseline; justify-content: center; gap: 12px;
+      margin: 32px 0 20px;
+    }
+    .score-num {
+      font-size: clamp(80px, 16vw, 128px); font-weight: 900;
+      letter-spacing: -0.05em; color: var(--blue); line-height: 1;
+    }
+    .score-denom {
+      font-size: 22px; color: var(--faint); font-weight: 400;
+    }
+    .tier-badge {
+      display: inline-block; padding: 7px 20px; border-radius: 100px;
+      font-size: 14px; font-weight: 700; letter-spacing: 0.04em;
+      margin-bottom: 24px;
+    }
+    .tier-pioneer  { background: rgba(59,123,255,0.15);  color: #6fa0ff; border: 1px solid rgba(59,123,255,0.4); }
+    .tier-operator { background: rgba(34,197,94,0.12);   color: #4ade80; border: 1px solid rgba(34,197,94,0.35); }
+    .tier-experimenter { background: rgba(251,191,36,0.12); color: #fbbf24; border: 1px solid rgba(251,191,36,0.35); }
+    .tier-skeptic  { background: rgba(239,68,68,0.12);   color: #f87171; border: 1px solid rgba(239,68,68,0.35); }
+    .tier-desc {
+      max-width: 600px; margin: 0 auto 36px;
+      font-size: 17px; line-height: 1.75; color: var(--mid);
+    }
+    .score-meta {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      font-size: 13px; color: var(--dim);
+    }
+    .score-meta span { display: flex; align-items: center; gap: 5px; }
+    .score-meta .sep { color: var(--faint); }
+
+    /* ── CONTENT WRAPPER ── */
+    .wrapper { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── SECTIONS ── */
+    .report-section {
+      padding: 72px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .section-tag {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(24px, 4vw, 36px); font-weight: 800;
+      color: var(--bright); letter-spacing: -0.02em; line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .section-lead {
+      font-size: 17px; line-height: 1.8; color: var(--mid);
+      margin-bottom: 32px;
+    }
+
+    /* ── WHAT THIS MEANS: breakdown bars ── */
+    .score-breakdown { display: flex; flex-direction: column; gap: 18px; margin-top: 32px; }
+    .breakdown-item {}
+    .breakdown-header {
+      display: flex; justify-content: space-between;
+      font-size: 14px; font-weight: 600; color: var(--bright); margin-bottom: 8px;
+    }
+    .breakdown-bar-track {
+      height: 6px; background: rgba(255,255,255,0.07); border-radius: 3px; overflow: hidden;
+    }
+    .breakdown-bar-fill {
+      height: 100%; border-radius: 3px;
+      background: linear-gradient(90deg, var(--blue), #5b9bff);
+      transition: width 1.2s cubic-bezier(0.16,1,0.3,1);
+    }
+    .breakdown-note {
+      font-size: 13px; color: var(--dim); margin-top: 6px; line-height: 1.5;
+    }
+
+    /* ── TIER CONTEXT CARD ── */
+    .tier-context-card {
+      background: var(--surface); border: 1px solid var(--rule);
+      border-radius: 16px; padding: 32px 36px; margin-top: 36px;
+    }
+    .tier-context-card h3 { font-size: 18px; color: var(--bright); font-weight: 700; margin-bottom: 12px; }
+    .tier-context-card p { font-size: 15px; line-height: 1.75; color: var(--mid); }
+    .tier-context-card .stat-row {
+      display: flex; gap: 24px; margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .stat-box {
+      flex: 1; min-width: 140px;
+      background: var(--surface2); border: 1px solid var(--rule);
+      border-radius: 10px; padding: 18px 20px;
+    }
+    .stat-box .num { font-size: 32px; font-weight: 800; color: var(--blue); letter-spacing: -0.03em; }
+    .stat-box .label { font-size: 13px; color: var(--dim); margin-top: 4px; line-height: 1.4; }
+
+    /* ── CASE STUDIES ── */
+    .case-studies { display: flex; flex-direction: column; gap: 24px; margin-top: 32px; }
+    .case-card {
+      background: var(--surface); border: 1px solid var(--rule);
+      border-radius: 16px; padding: 32px 36px;
+      transition: border-color 0.2s;
+    }
+    .case-card:hover { border-color: rgba(59,123,255,0.3); }
+    .case-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap; margin-bottom: 16px;
+    }
+    .case-industry {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--blue);
+    }
+    .case-result-badge {
+      background: rgba(59,123,255,0.12); border: 1px solid rgba(59,123,255,0.3);
+      border-radius: 8px; padding: 5px 14px;
+      font-size: 13px; font-weight: 700; color: #6fa0ff;
+      white-space: nowrap;
+    }
+    .case-title {
+      font-size: 19px; font-weight: 700; color: var(--bright); margin-bottom: 12px;
+    }
+    .case-body { font-size: 15px; line-height: 1.75; color: var(--mid); }
+    .case-stats {
+      display: flex; gap: 20px; flex-wrap: wrap;
+      margin-top: 20px; padding-top: 20px;
+      border-top: 1px solid var(--rule);
+    }
+    .case-stat {}
+    .case-stat .val { font-size: 22px; font-weight: 800; color: var(--bright); letter-spacing: -0.02em; }
+    .case-stat .key { font-size: 12px; color: var(--dim); margin-top: 2px; }
+
+    /* ── GAP DATA ── */
+    .gap-table { width: 100%; border-collapse: collapse; margin-top: 24px; }
+    .gap-table th {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--faint);
+      padding: 0 20px 12px; text-align: left; border-bottom: 1px solid var(--rule);
+    }
+    .gap-table td {
+      padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 14px; line-height: 1.5; vertical-align: top;
+    }
+    .gap-table tr:last-child td { border-bottom: none; }
+    .gap-table td:first-child { color: var(--bright); font-weight: 600; width: 30%; }
+    .gap-table td:nth-child(2) { color: var(--mid); }
+    .gap-table td:last-child { font-weight: 700; }
+    .gap-table tr:nth-child(odd) td { background: rgba(255,255,255,0.015); }
+    .risk-high   { color: #f87171; }
+    .risk-medium { color: #fbbf24; }
+    .risk-low    { color: #4ade80; }
+
+    .insight-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
+    @media (max-width: 600px) { .insight-cards { grid-template-columns: 1fr; } }
+    .insight-card {
+      background: var(--surface); border: 1px solid var(--rule);
+      border-radius: 12px; padding: 22px 24px;
+    }
+    .insight-card .ic-num {
+      font-size: 36px; font-weight: 900; color: var(--blue); letter-spacing: -0.03em; line-height: 1;
+    }
+    .insight-card .ic-label { font-size: 13px; color: var(--dim); margin-top: 6px; line-height: 1.5; }
+
+    /* ── 5 QUESTIONS ── */
+    .questions-list { list-style: none; display: flex; flex-direction: column; gap: 16px; margin-top: 28px; }
+    .questions-list li {
+      display: flex; align-items: flex-start; gap: 18px;
+      background: var(--surface); border: 1px solid var(--rule);
+      border-radius: 12px; padding: 22px 24px;
+    }
+    .q-num {
+      flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%;
+      background: var(--blue-glow); border: 1px solid rgba(59,123,255,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 800; color: var(--blue);
+    }
+    .q-text {
+      font-size: 15px; line-height: 1.65; color: var(--mid); padding-top: 4px;
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      padding: 80px 24px;
+      text-align: center;
+      background: radial-gradient(ellipse 600px 350px at 50% 100%, rgba(59,123,255,0.06) 0%, transparent 70%);
+    }
+    .cta-section .section-tag { margin-bottom: 20px; }
+    .cta-section h2 {
+      font-size: clamp(28px, 5vw, 44px); font-weight: 800;
+      color: var(--bright); letter-spacing: -0.025em; line-height: 1.15;
+      margin-bottom: 20px; max-width: 640px; margin-left: auto; margin-right: auto;
+    }
+    .cta-section .sub {
+      font-size: 17px; color: var(--dim); max-width: 520px;
+      margin: 0 auto 40px; line-height: 1.7;
+    }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--blue); color: #fff;
+      border: none; border-radius: 10px;
+      padding: 18px 36px; font-size: 17px; font-weight: 700;
+      cursor: pointer; text-decoration: none;
+      transition: opacity 0.15s, transform 0.15s;
+      box-shadow: 0 0 40px rgba(59,123,255,0.3);
+    }
+    .cta-btn:hover { opacity: 0.9; color: #fff; transform: translateY(-1px); }
+    .cta-meta {
+      margin-top: 20px; font-size: 13px; color: var(--faint);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 40px 24px;
+      text-align: center;
+    }
+    footer p { font-size: 13px; color: var(--faint); }
+    footer a { color: var(--faint); }
+    footer a:hover { color: var(--dim); }
+
+    /* ── URGENCY BANNER ── */
+    .urgency-bar {
+      background: linear-gradient(90deg, rgba(59,123,255,0.12) 0%, rgba(59,123,255,0.06) 100%);
+      border-bottom: 1px solid rgba(59,123,255,0.2);
+      padding: 14px 24px;
+      text-align: center;
+    }
+    .urgency-bar p {
+      font-size: 14px; color: var(--mid);
+    }
+    .urgency-bar strong { color: var(--bright); }
+
+    /* ── HIDDEN ── */
+    .tier-content { display: none; }
+    .tier-content.active { display: block; }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 20px; }
+      .score-hero { padding: 60px 20px 48px; }
+      .tier-context-card { padding: 24px 20px; }
+      .case-card { padding: 24px 20px; }
+      .questions-list li { padding: 18px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- URGENCY BANNER -->
+  <div class="urgency-bar" id="urgency-banner">
+    <p><strong>Your report is ready.</strong> Most companies that don't act on AI readiness data in 30 days never do. Your call slot is open now.</p>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/">
+      <img src="assets/omegabyte-logo.png" alt="OMEGABYTE.AI" class="nav-logo" />
+    </a>
+    <a href="https://cal.com/team/omegabyte/ai-strategy-discovery-call" target="_blank" rel="noopener" class="nav-cta">
+      Book Discovery Call
+    </a>
+  </nav>
+
+  <!-- SCORE HERO -->
+  <section class="score-hero">
+    <p class="score-label">Your AI Readiness Report</p>
+    <h1 class="greeting" id="greeting">Here's where you stand, <span id="name-display">—</span></h1>
+    <div class="score-display">
+      <span class="score-num" id="score-anim">0</span>
+      <span class="score-denom">/ 100</span>
+    </div>
+    <div class="tier-badge" id="tier-badge-hero"></div>
+    <p class="tier-desc" id="tier-desc-hero"></p>
+    <div class="score-meta">
+      <span id="company-display"></span>
+      <span class="sep" id="company-sep" style="display:none">·</span>
+      <span>Assessed <span id="today-date"></span></span>
+    </div>
+  </section>
+
+  <!-- SECTION 1: WHAT THIS MEANS -->
+  <section class="report-section">
+    <div class="wrapper">
+      <p class="section-tag">Section 1 — Score Interpretation</p>
+      <h2 class="section-title">What your score actually means</h2>
+      <p class="section-lead" id="score-meaning-lead">Based on your responses, here's a breakdown of where your AI readiness stands — and where the biggest gaps are hiding.</p>
+
+      <div class="tier-context-card" id="tier-context">
+        <!-- populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: CASE STUDIES -->
+  <section class="report-section">
+    <div class="wrapper">
+      <p class="section-tag">Section 2 — Real-World Results</p>
+      <h2 class="section-title">Companies at your stage — what happened next</h2>
+      <p class="section-lead">These aren't aspirational stories. They're typical outcomes for companies who engaged a structured AI strategy — and companies who didn't.</p>
+
+      <div class="case-studies">
+
+        <div class="case-card">
+          <div class="case-header">
+            <span class="case-industry">Professional Services · 120 employees</span>
+            <span class="case-result-badge">+$2.1M revenue impact</span>
+          </div>
+          <h3 class="case-title">Ops firm cut proposal time by 73% using AI workflow</h3>
+          <p class="case-body">A management consulting firm was spending 18 hours per proposal. A targeted AI workflow — built in 6 weeks — cut it to under 5 hours. Within 8 months they had taken on 40% more engagements without adding headcount, adding $2.1M in revenue on the same cost base.</p>
+          <div class="case-stats">
+            <div class="case-stat"><div class="val">73%</div><div class="key">proposal time reduction</div></div>
+            <div class="case-stat"><div class="val">40%</div><div class="key">more engagements</div></div>
+            <div class="case-stat"><div class="val">6 wks</div><div class="key">to first deployment</div></div>
+          </div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-header">
+            <span class="case-industry">Distribution · 340 employees</span>
+            <span class="case-result-badge">$680K/yr cost reduction</span>
+          </div>
+          <h3 class="case-title">Distributor replaced 4 manual reporting roles with AI agents</h3>
+          <p class="case-body">A mid-market distributor had four full-time staff compiling daily reports across 12 data sources. A custom AI agent pipeline replaced the work entirely in 90 days. The staff were redeployed to customer-facing roles. Net savings: $680,000 annually. Customer satisfaction scores rose 14 points.</p>
+          <div class="case-stats">
+            <div class="case-stat"><div class="val">$680K</div><div class="key">annual savings</div></div>
+            <div class="case-stat"><div class="val">90 days</div><div class="key">implementation</div></div>
+            <div class="case-stat"><div class="val">+14pts</div><div class="key">CSAT improvement</div></div>
+          </div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-header">
+            <span class="case-industry">Healthcare Services · 85 employees</span>
+            <span class="case-result-badge">3.2x lead conversion</span>
+          </div>
+          <h3 class="case-title">Healthcare services company tripled qualified leads without increasing ad spend</h3>
+          <p class="case-body">A regional healthcare services provider deployed an AI-powered intake and triage system. Unqualified inquiries dropped 60%. Response time went from 4 hours to 4 minutes. Qualified lead conversion tripled. The same marketing budget now generates 3.2x the patient volume.</p>
+          <div class="case-stats">
+            <div class="case-stat"><div class="val">3.2x</div><div class="key">qualified conversion</div></div>
+            <div class="case-stat"><div class="val">4 min</div><div class="key">avg response time</div></div>
+            <div class="case-stat"><div class="val">60%</div><div class="key">fewer unqualified inquiries</div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: COMPETITIVE GAP DATA -->
+  <section class="report-section">
+    <div class="wrapper">
+      <p class="section-tag">Section 3 — Competitive Intelligence</p>
+      <h2 class="section-title">The gap your competitors are running through</h2>
+      <p class="section-lead">This isn't hypothetical. Companies that deploy structured AI strategies now are compounding an operational advantage that takes 18–24 months to overcome. Here's what the data says.</p>
+
+      <div class="insight-cards">
+        <div class="insight-card">
+          <div class="ic-num">78%</div>
+          <div class="ic-label">of mid-market companies have no formal AI strategy — yet 91% of their CEOs say AI is a top-3 priority for 2026.</div>
+        </div>
+        <div class="insight-card">
+          <div class="ic-num">4.3x</div>
+          <div class="ic-label">ROI difference between companies with a documented AI roadmap vs. those running ad-hoc pilots (McKinsey, 2025).</div>
+        </div>
+        <div class="insight-card">
+          <div class="ic-num">18 mo</div>
+          <div class="ic-label">Average time for a competitor's operational AI advantage to become difficult to overcome once established.</div>
+        </div>
+        <div class="insight-card">
+          <div class="ic-num">62%</div>
+          <div class="ic-label">of companies that attempted AI without a strategy reported "no measurable ROI" after 12 months of investment.</div>
+        </div>
+      </div>
+
+      <table class="gap-table" style="margin-top:40px">
+        <thead>
+          <tr>
+            <th>Capability Area</th>
+            <th>Without AI Strategy</th>
+            <th>Risk Level</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Proposal / Bid Speed</td>
+            <td>Competitors close deals 2–3x faster with AI-assisted proposals</td>
+            <td class="risk-high">HIGH</td>
+          </tr>
+          <tr>
+            <td>Cost Structure</td>
+            <td>Manual process overhead grows as AI adopters reduce headcount costs 15–30%</td>
+            <td class="risk-high">HIGH</td>
+          </tr>
+          <tr>
+            <td>Talent Retention</td>
+            <td>AI-enabled workplaces attract top talent; manual-heavy orgs struggle to hire</td>
+            <td class="risk-medium">MEDIUM</td>
+          </tr>
+          <tr>
+            <td>Customer Response Time</td>
+            <td>AI-powered competitors respond in minutes; you respond in hours or days</td>
+            <td class="risk-high">HIGH</td>
+          </tr>
+          <tr>
+            <td>Data Utilization</td>
+            <td>Competitors extract real-time insights; your reports are still monthly retrospectives</td>
+            <td class="risk-medium">MEDIUM</td>
+          </tr>
+          <tr>
+            <td>Product Roadmap Speed</td>
+            <td>AI-assisted dev cycles are 40–60% faster — competitors ship more, faster</td>
+            <td class="risk-medium">MEDIUM</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SECTION 4: 5 QUESTIONS -->
+  <section class="report-section">
+    <div class="wrapper">
+      <p class="section-tag">Section 4 — Discovery Call Prep</p>
+      <h2 class="section-title">5 questions to bring to your discovery call</h2>
+      <p class="section-lead">These aren't generic questions. They're calibrated to where companies at your stage get the most value — and where strategy typically breaks down. Bring them ready.</p>
+
+      <ul class="questions-list">
+        <li>
+          <span class="q-num">1</span>
+          <span class="q-text">Based on my score and industry, where is the highest-ROI AI opportunity I could deploy in the next 90 days — and what would it actually cost to execute?</span>
+        </li>
+        <li>
+          <span class="q-num">2</span>
+          <span class="q-text">What's the difference between a Fractional Chief AI Officer and hiring a full-time AI lead — and at my company's stage, which model actually delivers faster results?</span>
+        </li>
+        <li>
+          <span class="q-num">3</span>
+          <span class="q-text">My team has tried AI tools before and they didn't stick. What's typically causing that, and how does a structured strategy prevent it from happening again?</span>
+        </li>
+        <li>
+          <span class="q-num">4</span>
+          <span class="q-text">If I do nothing for the next 6 months, what does my competitive position look like versus companies that are moving on AI right now?</span>
+        </li>
+        <li>
+          <span class="q-num">5</span>
+          <span class="q-text">What does a realistic first 30–60–90 day AI roadmap look like for a company like mine — and what would I need to have in place before we start?</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta-section">
+    <p class="section-tag">Ready to close the gap?</p>
+    <h2>Book your free 30-minute AI Strategy Discovery Call</h2>
+    <p class="sub">Bring your score. Bring your questions. Walk away with a clear picture of your highest-leverage AI moves — at no cost, no obligation.</p>
+    <a href="https://cal.com/team/omegabyte/ai-strategy-discovery-call" target="_blank" rel="noopener" class="cta-btn">
+      Book My Discovery Call &rarr;
+    </a>
+    <p class="cta-meta">30 minutes · No pitch · No pressure · Shawn Panchacharam, Fractional Chief AI Officer</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 <a href="/">OMEGABYTE.AI</a> &nbsp;·&nbsp; <a href="mailto:shawn@aichiefstrategy.com">shawn@aichiefstrategy.com</a></p>
+  </footer>
+
+  <script>
+    (function() {
+      // Parse URL params
+      var params = new URLSearchParams(window.location.search);
+      var score   = parseInt(params.get('score') || '0', 10);
+      var tier    = params.get('tier')    || 'skeptic';
+      var label   = params.get('label')  || '';
+      var name    = params.get('name')   || '';
+      var company = params.get('company')|| '';
+      var goal    = params.get('goal')   || '';
+      var past    = params.get('past')   || '';
+      var fwd     = params.get('fwd')    || '';
+      var tools   = params.get('tools')  || '';
+
+      // Tier data
+      var tierData = {
+        pioneer: {
+          badge: 'AI Pioneer',
+          cls: 'tier-pioneer',
+          desc: 'You\'re ahead of the curve. Your infrastructure is in place — the question now is velocity: how fast to scale, which investments compound fastest, and how to build defensible AI advantages before the gap narrows.',
+          cardTitle: 'You\'re in the top quartile — here\'s the ceiling',
+          cardText: 'Most companies at the Pioneer level are running strong pilots. The risk is fragmentation — AI activity without architectural coherence. The next stage is building an AI operating model that ties your tools, data, and team together into compounding advantage.',
+          stats: [
+            { num: 'Top 15%', label: 'of mid-market companies at your readiness level' },
+            { num: '3–6 mo', label: 'to build a defensible AI moat with the right strategy' },
+            { num: '2.8x', label: 'ROI uplift from structured AI operating model vs. ad-hoc' }
+          ]
+        },
+        operator: {
+          badge: 'AI Operator',
+          cls: 'tier-operator',
+          desc: 'Real AI activity is happening — but it\'s not yet systematic. You\'re leaving compounding gains on the table. The gap between where you are and AI Pioneer is narrower than you think, but it requires deliberate architecture.',
+          cardTitle: 'Solid foundation — missing the connective tissue',
+          cardText: 'Operators have proven they can adopt AI. The challenge is orchestration: making tools talk to each other, building institutional knowledge, and ensuring AI decisions have a clear owner. That connective tissue is what separates Operators from Pioneers.',
+          stats: [
+            { num: 'Top 35%', label: 'of mid-market companies — you\'re ahead of most' },
+            { num: '90 days', label: 'to move from Operator to Pioneer with a clear roadmap' },
+            { num: '4.1x', label: 'avg. ROI for companies that systematize their AI stack' }
+          ]
+        },
+        experimenter: {
+          badge: 'AI Experimenter',
+          cls: 'tier-experimenter',
+          desc: 'You\'ve explored AI but haven\'t found a way to make it stick. This is the most common — and most dangerous — position: you\'ve invested time and money without return, and experimentation fatigue is real.',
+          cardTitle: 'The trap most companies don\'t see',
+          cardText: 'Experimenters have tried. The problem isn\'t effort — it\'s sequence. AI tools without process redesign create noise, not value. Without a strategy that ties tools to business outcomes, each new pilot just adds complexity. The pivot from Experimenter to Operator takes a defined playbook, not more experiments.',
+          stats: [
+            { num: '62%', label: 'of companies at this stage report zero measurable ROI on AI spend' },
+            { num: '18 mo', label: 'competitive disadvantage window if competitors move now and you don\'t' },
+            { num: '6–8 wks', label: 'to build a focused AI playbook that stops the experiment cycle' }
+          ]
+        },
+        skeptic: {
+          badge: 'AI Skeptic',
+          cls: 'tier-skeptic',
+          desc: 'You\'re behind where you need to be. This isn\'t a judgment — it\'s a data point. Your competitors who are moving now are building an operational advantage that compounds every month. The question isn\'t whether to act. It\'s how fast.',
+          cardTitle: 'The compounding gap — what the data says',
+          cardText: 'Companies at the Skeptic stage often believe they can catch up quickly when the time is right. The data says otherwise: AI operational advantages compound. A competitor 12 months ahead of you operationally isn\'t 12 months ahead — they\'re compounding institutional knowledge, customer data, and process efficiency that take 24–36 months to overcome. The window to move cost-effectively is now.',
+          stats: [
+            { num: '24–36 mo', label: 'to overcome a competitor\'s established AI operational advantage' },
+            { num: '$0', label: 'sunk cost — starting clean with a strategy is faster than you think' },
+            { num: '30 days', label: 'to have a working AI strategy and first deployment identified' }
+          ]
+        }
+      };
+
+      var td = tierData[tier] || tierData.skeptic;
+
+      // Set badge class
+      var badgeEl = document.getElementById('tier-badge-hero');
+      badgeEl.className = 'tier-badge ' + td.cls;
+      badgeEl.textContent = td.badge || label;
+
+      // Set tier desc
+      document.getElementById('tier-desc-hero').textContent = td.desc;
+
+      // Set greeting
+      if (name) {
+        document.getElementById('name-display').textContent = name;
+      } else {
+        document.getElementById('greeting').textContent = "Here's where you stand";
+      }
+
+      // Set company
+      if (company) {
+        document.getElementById('company-display').textContent = company;
+        document.getElementById('company-sep').style.display = 'inline';
+      }
+
+      // Set today's date
+      document.getElementById('today-date').textContent = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+      // Animate score
+      var scoreEl = document.getElementById('score-anim');
+      var startTime = null;
+      var duration = 1100;
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        var p = Math.min((ts - startTime) / duration, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        scoreEl.textContent = Math.round(eased * score);
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+
+      // Tier context card
+      var card = document.getElementById('tier-context');
+      var statsHTML = td.stats.map(function(s) {
+        return '<div class="stat-box"><div class="num">' + s.num + '</div><div class="label">' + s.label + '</div></div>';
+      }).join('');
+      card.innerHTML = '<h3>' + td.cardTitle + '</h3><p>' + td.cardText + '</p><div class="stat-row">' + statsHTML + '</div>';
+
+      // Score meaning lead — personalize
+      var leadEl = document.getElementById('score-meaning-lead');
+      if (goal) {
+        leadEl.textContent = 'You said your primary AI goal is: "' + goal + '." Here\'s what your score tells us about your current position — and the gap between where you are and where you need to be to execute on that goal.';
+      }
+
+      // GA4 event
+      if (typeof gtag === 'function') {
+        gtag('event', 'report_viewed', {
+          'score': score,
+          'tier': tier,
+          'has_name': name ? 'yes' : 'no',
+          'forward_investment': fwd || 'unknown'
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>
