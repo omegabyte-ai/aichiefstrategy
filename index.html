@@ -868,7 +868,40 @@
           name: name, company: company, goal: goal,
           past: past, fwd: fwd, tools: tools
         });
-        window.location.href = '/thank-you.html?' + params.toString();
+        var redirectUrl = '/thank-you.html?' + params.toString();
+
+        // Disable submit button to prevent double-submit
+        var btn = document.querySelector('.sc-submit');
+        if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+
+        // POST lead to backend (fire-and-forget with 5s timeout — never blocks user)
+        var qs = new URLSearchParams(window.location.search);
+        var apiPayload = {
+          name: name, company: company, email: email,
+          score: score, tier: tier, label: label,
+          goal: goal, past: past, fwd: fwd, tools: tools,
+          source: window.location.href,
+          utm_source: qs.get('utm_source') || '',
+          utm_medium: qs.get('utm_medium') || '',
+          utm_campaign: qs.get('utm_campaign') || ''
+        };
+
+        var apiTimeout = new Promise(function(_, reject) {
+          setTimeout(function() { reject(new Error('timeout')); }, 5000);
+        });
+
+        Promise.race([
+          fetch('/api/scorecard-lead', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(apiPayload)
+          }),
+          apiTimeout
+        ]).catch(function(e) {
+          console.warn('Lead capture API error (non-blocking):', e.message);
+        }).finally(function() {
+          window.location.href = redirectUrl;
+        });
       };
 
     })();
