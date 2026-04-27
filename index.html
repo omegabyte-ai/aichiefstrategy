@@ -728,13 +728,24 @@
           ]
         },
         {
+          q: "What is your planned AI budget for the next 12 months?",
+          qualifying: true,
+          answers: [
+            "We haven\'t set a budget yet",
+            "Under $25K",
+            "$25K \u2013 $100K",
+            "$100K \u2013 $500K",
+            "Over $500K"
+          ]
+        },
+        {
           q: "If you found the right AI strategy partner, how quickly would you be willing to move?",
           qualifying: true,
           answers: [
-            "Immediately — we're ready now",
+            "Immediately — we\'re ready now",
             "Within 30 days",
             "Within 90 days",
-            "We're still in evaluation mode"
+            "We\'re still in evaluation mode"
           ]
         }
       ];
@@ -856,7 +867,8 @@
 
         var goal = answers[7] || '';
         var past = answers[8] || '';
-        var fwd = answers[9] || '';
+        var budget = answers[9] || '';
+        var fwd = answers[10] || '';
         var tools = Array.isArray(answers[6]) ? answers[6].join(',') : (answers[6] || '');
 
         if (typeof gtag === 'function') {
@@ -866,7 +878,7 @@
         var params = new URLSearchParams({
           score: score, tier: tier, label: label,
           name: name, company: company, goal: goal,
-          past: past, fwd: fwd, tools: tools
+          past: past, budget: budget, fwd: fwd, tools: tools
         });
         var redirectUrl = '/thank-you.html?' + params.toString();
 
@@ -879,7 +891,7 @@
         var apiPayload = {
           name: name, company: company, email: email,
           score: score, tier: tier, label: label,
-          goal: goal, past: past, fwd: fwd, tools: tools,
+          goal: goal, past: past, budget: budget, fwd: fwd, tools: tools,
           source: window.location.href,
           utm_source: qs.get('utm_source') || '',
           utm_medium: qs.get('utm_medium') || '',
