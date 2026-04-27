@@ -1,11 +1,11 @@
-# AI Strategy Chief — aichiefstrategy.com
+# AI Chief Strategies — aichiefstrategies.com
 # Robots configuration — 2026-04-24
 
 User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://www.aichiefstrategy.com/sitemap.xml
+Sitemap: https://www.aichiefstrategies.com/sitemap.xml
 
 # AI crawler access — explicitly allow for GEO/AEO visibility
 User-agent: GPTBot
